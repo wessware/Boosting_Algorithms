@@ -12,11 +12,9 @@ For this project, we will primarily focus on two boosting algorithm; CatBoost an
 
 ### Extreme Gradient Boosting Algorithm
 
-Trained on 80% of the dataset. 
+Trained on 80% of the dataset.
 
 #### Performance
 
 Initial rmse scored 0.5179 [using binary:logistic as the loss function]
 Score after Hyperparameter tuning 0.4685 [using binary:logistic as the loss function]
-
-
