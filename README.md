@@ -18,3 +18,4 @@ Trained on 80% of the dataset.
 
 Initial rmse scored 0.5179 [using binary:logistic as the loss function]
 Score after Hyperparameter tuning 0.4685 [using binary:logistic as the loss function]
+Score using hyperopt tuner rmse 0.4349
