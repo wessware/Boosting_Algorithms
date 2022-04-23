@@ -1,8 +1,12 @@
-# Boosting_Algorithms
+# Statement Problem
+
+Allocating loans to customers with an assurance that they will payback is serious problem for many seasoned and upcoming
+fintech companies. This machine learning approach intends to predict [classify] customers as credit worth or not by assigning them a credit score
+between 0 and 1 and a payback probability. With a proper tuning, this model could be the awaited solution to help companies avoid losses in money lending.
+
+## Boosting_Algorithms
 
 Algorithms that use boosting techniques to minimize the loss function for both classification and regression problems.
-
-Due to the robustness and performance reputation of these models, we will use them to try and create a usable credit score for customers we intend to lend money to.
 
 Attention will be paid to the training time and loss minimization for the models
 
