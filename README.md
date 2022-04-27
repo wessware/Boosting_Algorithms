@@ -20,6 +20,13 @@ Trained on 80% of the dataset.
 
 #### Performance
 
-Initial rmse scored 0.5179 [using binary:logistic as the loss function]
-Score after Hyperparameter tuning 0.4685 [using binary:logistic as the loss function]
-Score using hyperopt tuner rmse 0.4349
+##### xgb
+
+Initial rmse scored                 0.5179          [using binary:logistic loss function]
+Score after Hyperparameter          0.4685          [using binary:logistic loss function]
+Score using hyperopt tuner rmse     0.4349          [using binary:logistic loss function]
+
+score using synthetic data ===> 0.2872281323269014  [binary:logistic loss function]
+score using synthetic data ===> 0.2806243040080456  [multi:softmax loss function]
+
+score; hyperopt + synthetic data ===> 0.2645751311064591 [binary:logistic loss function]
