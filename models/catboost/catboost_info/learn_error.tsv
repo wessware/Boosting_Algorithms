@@ -1,4 +1,4 @@
-iter	Logloss
+iter	CrossEntropy
 0	0.6394921875
 1	0.6109950038
 2	0.5453326416
