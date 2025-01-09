@@ -46,3 +46,5 @@ synthetic data grid search score ===> 0.27988092706244444
 Extreme Gradient Boosting [XGB] Classifier ==> 0.2645751311064591 [trained faster than CatBoost classifier]
 
 CatBoost [CB] Classifier ==> 0.27988092706244444
+
+https://github.com/wessware/clustering_algorithms
