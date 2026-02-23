@@ -114,11 +114,15 @@ GROUP BY Self_Employed;
 
 WITH Approved AS (
     SELECT * 
+    
     FROM loan_data_clean
+
     WHERE Loan_Status = 1
 )
 SELECT Dependents, COUNT(*) as Approval_by_Number_of_Dependents
+
 FROM Approved 
+
 GROUP BY Dependents;
 
 
@@ -128,8 +132,11 @@ GROUP BY Dependents;
 
 WITH AVG_LOANS AS (
     SELECT Property_Area, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+
     FROM loan_data_clean
+
     WHERE ApplicantIncome > 0 AND LoanAmount > 0
+
     GROUP BY Property_Area
 )
 SELECT * FROM AVG_LOANS;
@@ -137,9 +144,13 @@ SELECT * FROM AVG_LOANS;
 --2 
 
 WITH AVG_LOANS AS (
+
     SELECT Gender, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+
     FROM loan_data_clean
+
     WHERE ApplicantIncome > 0 AND LoanAmount > 0
+
     GROUP BY Gender
 )
 SELECT * FROM AVG_LOANS;
@@ -149,8 +160,11 @@ SELECT * FROM AVG_LOANS;
 
 WITH AVG_LOANS AS (
     SELECT Dependents, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+
     FROM loan_data_clean
+
     WHERE ApplicantIncome > 0 AND LoanAmount > 0
+
     GROUP BY Dependents
 )
 SELECT * FROM AVG_LOANS;
@@ -159,8 +173,46 @@ SELECT * FROM AVG_LOANS;
 
 WITH AVG_LOANS AS (
     SELECT Self_Employed, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+
     FROM loan_data_clean
+
     WHERE ApplicantIncome > 0 AND LoanAmount > 0
+
     GROUP BY Self_Employed
 )
 SELECT * FROM AVG_LOANS;
+
+--RANKING APPLICANTS BY INCOME AND LOAN AMOUNT ON CATEGORICAL VARIABLES
+
+--1
+
+SELECT ApplicantIncome, LoanAmount, Gender,
+
+RANK() OVER (ORDER BY ApplicantIncome DESC) AS Applicant_Income_Ranking
+
+FROM loan_data_clean;
+
+
+--2
+
+SELECT Gender, ApplicantIncome, LoanAmount, 
+
+RANK() OVER (ORDER BY Gender DESC) AS Applicant_Income_Ranking
+
+FROM loan_data_clean;
+
+--3
+
+SELECT Dependents, ApplicantIncome, LoanAmount, Gender,
+
+RANK() OVER (ORDER BY Dependents ASC) AS Applicant_Income_Ranking
+
+FROM loan_data_clean;
+
+--4
+
+SELECT Property_Area, LoanAmount, ApplicantIncome, Gender,
+
+ROW_NUMBER() OVER (PARTITION BY Property_Area ORDER BY ApplicantIncome DESC) AS RANK_OF_INCOME_BY_PROPERTY_AREA
+
+FROM loan_data_clean;
