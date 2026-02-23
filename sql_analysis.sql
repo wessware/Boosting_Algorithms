@@ -63,3 +63,104 @@ WHERE LoanAmount / ApplicantIncome > (
     FROM loan_data_clean WHERE ApplicantIncome > 0 AND LoanAmount > 0
 
 );
+
+-- CTEs for APPROVALS BY CATEGORICAL VARIABLES
+
+--1 
+
+WITH Approved AS (
+    SELECT * 
+    FROM loan_data_clean
+    WHERE Loan_Status = 1
+)
+SELECT Property_Area, COUNT(*) as Approved_by_Property_Area
+FROM Approved 
+GROUP BY Property_Area;
+
+--2
+
+WITH Approved AS (
+    SELECT * 
+    FROM loan_data_clean
+    WHERE Loan_Status = 1
+)
+SELECT Gender, COUNT(*) as Approvals_by_Gender
+FROM Approved 
+GROUP BY Gender;
+
+--3
+
+WITH Approved AS (
+    SELECT * 
+    FROM loan_data_clean
+    WHERE Loan_Status = 1
+)
+SELECT Married, COUNT(*) as Approval_by_Marital_Status
+FROM Approved 
+GROUP BY Married;
+
+--4
+
+WITH Approved AS (
+    SELECT * 
+    FROM loan_data_clean
+    WHERE Loan_Status = 1
+)
+SELECT Self_Employed, COUNT(*) as Approvals_by_Employment_Status
+FROM Approved 
+GROUP BY Self_Employed;
+
+--5
+
+WITH Approved AS (
+    SELECT * 
+    FROM loan_data_clean
+    WHERE Loan_Status = 1
+)
+SELECT Dependents, COUNT(*) as Approval_by_Number_of_Dependents
+FROM Approved 
+GROUP BY Dependents;
+
+
+--- CTEs for AVERAGE LOAN AMOUNT BY CATEGORICAL VARIABLES
+
+--1
+
+WITH AVG_LOANS AS (
+    SELECT Property_Area, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    WHERE ApplicantIncome > 0 AND LoanAmount > 0
+    GROUP BY Property_Area
+)
+SELECT * FROM AVG_LOANS;
+
+--2 
+
+WITH AVG_LOANS AS (
+    SELECT Gender, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    WHERE ApplicantIncome > 0 AND LoanAmount > 0
+    GROUP BY Gender
+)
+SELECT * FROM AVG_LOANS;
+
+
+--3
+
+WITH AVG_LOANS AS (
+    SELECT Dependents, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    WHERE ApplicantIncome > 0 AND LoanAmount > 0
+    GROUP BY Dependents
+)
+SELECT * FROM AVG_LOANS;
+
+--4
+
+WITH AVG_LOANS AS (
+    SELECT Self_Employed, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    WHERE ApplicantIncome > 0 AND LoanAmount > 0
+    GROUP BY Self_Employed
+)
+SELECT * FROM AVG_LOANS;
