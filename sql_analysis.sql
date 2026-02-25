@@ -371,3 +371,22 @@ WITH APPROVED_LOANS AS (
 SELECT Dependents, COUNT(*) AS COUNT_OF_APPROVALS
 
 FROM APPROVED_LOANS GROUP BY Dependents;
+
+--CTE ANALYSIS FOR APPROVED LOANS STATISTICS FOR CATEGORICAL COLUMNS
+
+--1
+
+WITH LOAN_INCOME_RATIO AS (
+    SELECT LoanAmount, ApplicantIncome, Gender, Dependents, LoanAmount/ApplicantIncome AS Ratio
+    FROM loan_data_clean WHERE ApplicantIncome > 0 AND LoanAmount > 0
+)
+SELECT * FROM LOAN_INCOME_RATIO WHERE Ratio > 0.5 AND Gender=0 AND Dependents=0; 
+
+
+--2
+
+WITH LOAN_INCOME_RATIO AS (
+    SELECT LoanAmount, ApplicantIncome, Property_Area, LoanAmount/ApplicantIncome AS Ratio
+    FROM loan_data_clean WHERE ApplicantIncome > 0 AND LoanAmount > 0
+)
+SELECT * FROM LOAN_INCOME_RATIO WHERE Ratio < 0.5 AND Property_Area=0; 
