@@ -276,3 +276,59 @@ SELECT ApplicantIncome, LoanAmount,
 NTILE(4) OVER (ORDER BY ApplicantIncome) as INCOME_QUARTILE
 
 FROM loan_data_clean;
+
+--CTEs FOR AVERAGE LOAN AMOUNTS FOR CATEGORICAL VARIABLES
+
+--1
+
+WITH AVERAGE_LOAN_AMOUNT AS (
+    SELECT Property_Area, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    GROUP BY Property_Area
+)
+SELECT * FROM AVERAGE_LOAN_AMOUNT
+
+--2
+
+WITH AVERAGE_LOAN_AMOUNT AS (
+    SELECT Self_Employed, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    GROUP BY Self_Employed
+)
+SELECT * FROM AVERAGE_LOAN_AMOUNT
+
+--3
+
+WITH AVERAGE_LOAN_AMOUNT AS (
+    SELECT Gender, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    GROUP BY Gender
+)
+SELECT * FROM AVERAGE_LOAN_AMOUNT
+
+--4
+
+WITH AVERAGE_LOAN_AMOUNT AS (
+    SELECT Loan_Status, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    GROUP BY Loan_Status
+)
+SELECT * FROM AVERAGE_LOAN_AMOUNT
+
+--5
+
+WITH AVERAGE_LOAN_AMOUNT AS (
+    SELECT Dependents, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    GROUP BY Dependents
+)
+SELECT * FROM AVERAGE_LOAN_AMOUNT
+
+--6
+
+WITH AVERAGE_LOAN_AMOUNT AS (
+    SELECT Gender, AVG(LoanAmount) as AVERAGE_LOAN_AMOUNT
+    FROM loan_data_clean
+    GROUP BY Gender
+)
+SELECT * FROM AVERAGE_LOAN_AMOUNT
