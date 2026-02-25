@@ -390,3 +390,57 @@ WITH LOAN_INCOME_RATIO AS (
     FROM loan_data_clean WHERE ApplicantIncome > 0 AND LoanAmount > 0
 )
 SELECT * FROM LOAN_INCOME_RATIO WHERE Ratio < 0.5 AND Property_Area=0; 
+
+
+-- DEFAULT RATE ANALYSIS FOR DIFFERENT CATEGORICAL FEATURES
+
+--1
+
+WITH defaults AS (
+
+    SELECT Education, SUM(CASE WHEN Loan_Status=0 THEN 1 ELSE 0 END) AS defaults,
+    COUNT(*) AS total
+    FROM loan_data_clean GROUP BY Education
+)
+SELECT Education, defaults*100.0/total as Default_Rate FROM defaults;
+
+--2
+
+WITH defaults AS (
+
+    SELECT Gender, SUM(CASE WHEN Loan_Status=0 THEN 1 ELSE 0 END) AS defaults,
+    COUNT(*) AS total
+    FROM loan_data_clean GROUP BY Gender
+)
+SELECT Gender, defaults*100.0/total as Default_Rate FROM defaults;
+
+--3
+
+WITH defaults AS (
+
+    SELECT Dependents, SUM(CASE WHEN Loan_Status=0 THEN 1 ELSE 0 END) AS defaults,
+    COUNT(*) AS total
+    FROM loan_data_clean GROUP BY Dependents
+)
+SELECT Dependents, defaults*100.0/total as Default_Rate FROM defaults;
+
+--4
+
+WITH defaults AS (
+
+    SELECT Self_Employed, SUM(CASE WHEN Loan_Status=0 THEN 1 ELSE 0 END) AS defaults,
+    COUNT(*) AS total
+    FROM loan_data_clean GROUP BY Self_Employed
+)
+SELECT Self_Employed, defaults*100.0/total as Default_Rate FROM defaults;
+
+
+--5
+
+WITH defaults AS (
+
+    SELECT Property_Area, SUM(CASE WHEN Loan_Status=0 THEN 1 ELSE 0 END) AS defaults,
+    COUNT(*) AS total
+    FROM loan_data_clean GROUP BY Property_Area
+)
+SELECT Property_Area, defaults*100.0/total as Default_Rate FROM defaults;
