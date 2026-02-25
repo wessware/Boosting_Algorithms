@@ -268,3 +268,11 @@ SELECT ApplicantIncome,
 AVG(ApplicantIncome) OVER (ORDER BY ApplicantIncome ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS MOVING_AVERAGE_APPLICANT_INCOME
 
 FROM loan_data_clean;
+
+-- INCOME QUARTILES
+
+SELECT ApplicantIncome, LoanAmount,
+
+NTILE(4) OVER (ORDER BY ApplicantIncome) as INCOME_QUARTILE
+
+FROM loan_data_clean;
