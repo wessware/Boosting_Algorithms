@@ -216,3 +216,37 @@ SELECT Property_Area, LoanAmount, ApplicantIncome, Gender,
 ROW_NUMBER() OVER (PARTITION BY Property_Area ORDER BY ApplicantIncome DESC) AS RANK_OF_INCOME_BY_PROPERTY_AREA
 
 FROM loan_data_clean;
+
+
+-- CUMMULATIVE LOAN AMOUNT BY CATEGORICAL VARIABLES
+
+--1
+
+SELECT Property_Area, LoanAmount,
+
+SUM(LoanAmount) OVER (PARTITION BY Property_Area ORDER BY LoanAmount DESC) AS CUMULATIVE_LOAN_AMOUNT_BY_PROPERTY_AREA
+FROM loan_data_clean;
+
+--2
+
+
+SELECT Dependents, LoanAmount,
+
+SUM(LoanAmount) OVER (PARTITION BY Dependents ORDER BY LoanAmount DESC) AS CUMULATIVE_LOAN_AMOUNT_BY_DEPENDENTS
+FROM loan_data_clean;
+
+--3
+
+
+SELECT Gender, LoanAmount,
+
+SUM(LoanAmount) OVER (PARTITION BY Gender ORDER BY LoanAmount DESC) AS CUMULATIVE_LOAN_AMOUNT_BY_GENDER
+FROM loan_data_clean;
+
+
+--4
+
+SELECT Self_Employed, LoanAmount,
+
+SUM(LoanAmount) OVER (PARTITION BY Self_Employed ORDER BY LoanAmount ASC) AS CUMULATIVE_LOAN_AMOUNT_BY_SELF_EMPLOYED
+FROM loan_data_clean;
