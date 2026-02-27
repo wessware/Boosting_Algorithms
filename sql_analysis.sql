@@ -444,3 +444,41 @@ WITH defaults AS (
     FROM loan_data_clean GROUP BY Property_Area
 )
 SELECT Property_Area, defaults*100.0/total as Default_Rate FROM defaults;
+
+
+-- LOAN TERM CATEGORIZATION AND COUNT 
+
+SELECT CASE
+    WHEN Loan_Amount_Term <= 180 THEN "Short"
+    WHEN Loan_Amount_Term <= 360 THEN "Medium"
+    ELSE "Long"
+    END Loan_Term_Category,
+    COUNT(*) AS Count
+FROM loan_data_clean
+
+GROUP BY Loan_Term_Category;
+
+
+-- LOAN APPROVAL RATES BY INCOME BANDS
+
+SELECT CASE 
+    WHEN ApplicantIncome < 100 THEN "Low"
+    WHEN ApplicantIncome BETWEEN 100 and 200 THEN "MEDIUM" 
+    ELSE "High" 
+    END AS Income_bands,
+
+    SUM(CASE WHEN Loan_Status=1 THEN 1 ELSE 0 END)*100.0/COUNT(*) AS Loan_Approval_Rate
+FROM loan_data_clean
+GROUP BY Income_bands;
+
+-- BANDING AND COUNT FOR NUMBER OF DEPENDENTS
+
+SELECT CASE
+        WHEN Dependents = '0' THEN 'No Dependents'
+        WHEN Dependents = '1' THEN 'One'
+     ELSE 'Multiple'
+     END AS Dependents_Category,
+     COUNT(*) AS Count
+FROM loan_data_clean
+
+GROUP BY Dependents_category;
